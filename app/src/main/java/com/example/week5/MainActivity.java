@@ -29,7 +29,7 @@ private Button btnOW, btnJSON;
         btnJSON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (MainActivity.this, JSONTutorial.class);
+                Intent intent = new Intent (MainActivity.this, Main2Activity.class);
                 startActivity(intent);
             }
         });
