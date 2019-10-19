@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class JSONTutorial extends AppCompatActivity {
     private Button btnName, btnCourse, btnAge;
     private TextView tvdisplay;
@@ -15,6 +18,7 @@ public class JSONTutorial extends AppCompatActivity {
         "  \"courseName\": \"Computer Science\",\n" +
         "  \"age\": \"19\"\n" +
         "}";
+    private JSONObject myJSONObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class JSONTutorial extends AppCompatActivity {
 
         findViews();
         setListeners();
+        prepareJSON();
     }
 
     private void findViews(){
@@ -35,15 +40,26 @@ public class JSONTutorial extends AppCompatActivity {
     private void setListeners(){
         btnName.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View v){
+                try {
+                    String name = myJSONObject.getString("studentName");
+                    tvdisplay.setText(name);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btnCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String age = null;
+                try {
+                    age = myJSONObject.getString("age");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                tvdisplay.setText(age);
             }
         });
 
@@ -53,5 +69,13 @@ public class JSONTutorial extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void prepareJSON() {
+        try {
+            myJSONObject = new JSONObject(myJSONObjectString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
