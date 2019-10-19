@@ -53,6 +53,19 @@ public class JSONTutorial extends AppCompatActivity {
         btnCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String course = null;
+                try {
+                    course = myJSONObject.getString("courseName");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                tvdisplay.setText(course);
+            }
+        });
+
+        btnAge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 String age = null;
                 try {
                     age = myJSONObject.getString("age");
@@ -60,13 +73,6 @@ public class JSONTutorial extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 tvdisplay.setText(age);
-            }
-        });
-
-        btnAge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
