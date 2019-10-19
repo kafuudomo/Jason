@@ -7,17 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JSONTutorial extends AppCompatActivity {
-    private Button btnName, btnCourse, btnAge;
+    private Button btnName, btnCourse, btnAge, btnBooks;
     private TextView tvdisplay;
     private String myJSONObjectString = "{\n" +
-        "  \"studentName\": \"Nick\",\n" +
-        "  \"courseName\": \"Computer Science\",\n" +
-        "  \"age\": \"19\"\n" +
-        "}";
+            "  \"studentName\": \"Nick\",\n" +
+            "  \"courseName\": \"Computer Science\",\n" +
+            "  \"age\": \"19\",\n" +
+            "  \"borrowedBooks\": [\n" +
+            "    \"Harry Porter\",\n" +
+            "    \"The Prince\",\n" +
+            "    \"How to Java\"\n" +
+            "  ]\n" +
+            "}";
     private JSONObject myJSONObject;
 
     @Override
@@ -34,6 +40,7 @@ public class JSONTutorial extends AppCompatActivity {
         btnName = findViewById(R.id.btnGetName);
         btnCourse = findViewById(R.id.btnGetCourse);
         btnAge = findViewById(R.id.btnGetAge);
+        btnBooks = findViewById(R.id.btnGetBooks);
         tvdisplay = findViewById(R.id.tvText);
     }
 
@@ -73,6 +80,27 @@ public class JSONTutorial extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 tvdisplay.setText(age);
+            }
+        });
+
+        btnBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    JSONArray booksArray = new JSONArray(myJSONObject.getString("borrowedBooks"));
+                    String result = "";
+
+                    for (int i = 0; i < booksArray.length(); i++) {
+                        String bookName = booksArray.getString(i);
+                        result += bookName + "\n";
+                    }
+
+                    tvdisplay.setText(result);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

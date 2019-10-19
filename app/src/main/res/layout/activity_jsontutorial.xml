@@ -31,6 +31,12 @@
             android:layout_height="wrap_content"
             android:text="get age"/>
 
+        <Button
+            android:id="@+id/btnGetBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get books"/>
+
     </LinearLayout>
 
     <TextView
